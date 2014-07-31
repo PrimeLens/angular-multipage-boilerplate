@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title></title>
+	
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.16/angular.min.js"></script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.16/angular-route.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/css/bootstrap.min.css">
+  
+  
+    <style type="text/css">
+    	body { padding: 30px; }
+	    .mynav { padding: 20px 0;  }
+    	#appPage { margin-top: 20px; width: 700px; }
+    	#appPage img { width: 50%; }
+    	#appPage img[src="loading.gif"] { width: auto; }
+    </style>  
+  
+    <script type="text/javascript">    
+
+		var myapp = angular.module('myapp', ['ngRoute']);
+
+			
+		myapp.controller(
+			'AppCtrl', 
+			[
+				'$scope', 
+				'$log',
+				function($scope, $log) {
+					$scope.handleMyButton = function(){
+						$log.log('Angular Button clicked');
+					}
+				}
+			]
+		);
+		
+
+		myapp.config(specifyRoutes);
+		function specifyRoutes ($routeProvider) {
+			$routeProvider
+				.when('/', {templateUrl: 'partials/home-angular.html' })
+				.when('/pagea', {templateUrl: 'partials/pagea.html' });
+		}
+		    
+	</script>
+	
+
+</head>
+<body>
+
+
+
+	<div class="mynav">
+		<a href="#" class="btn btn-primary" >Home</a>
+		<a href="#/pagea" class="btn btn-default" >Page A</a>
+	</div>
+	
+	<div id="appPage" ng-controller="AppCtrl">
+		<div ng-view></div>
+	</div>
+	
+	
+</body>
+</html>
